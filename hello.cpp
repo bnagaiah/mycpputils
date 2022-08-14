@@ -13,6 +13,7 @@
 #include <curlpp/Exception.hpp>
 
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -48,12 +49,28 @@ int vectorfn() {
   return 0;
 }
 
+int lambda_fn()
+{
+   int d=3;
+ // [cc](p){fd};
+   vector<int> v{2,4,7,11,15,12,6};
+   for_each(v.begin(), v.end(), [=](int x) {
+      if(x%d==0)
+         cout << x << " is divisible by " << d << endl;
+      else
+         cout << x << " is not divisible by " << d << endl;
+   });
+   return 0;
+}
+
+
 int main()
 {
   std::cout << "Helloooo World" << std::endl;
   cout << "Hello World once again" << endl;
   //printname();
   vectorfn();
+  lambda_fn();
   //string url = "www.example.com";
   string url = "https://api.openweathermap.org/data/2.5/weather?q=Austin,us&appid=ee62a6da139f3ec355563665665e21c8&units=metric";
 
