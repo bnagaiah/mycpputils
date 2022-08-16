@@ -63,6 +63,44 @@ int lambda_fn()
    return 0;
 }
 
+class Human
+{
+  private:
+    int age;
+    string name;
+  public:
+    Human(string humansname = "Adam", int humansage = 25)
+    {
+	name = humansname;
+	age = humansage;
+	cout << name << " of age " << age << endl;
+    }
+
+    Human(const Human& CopyHuman)
+    {
+	name = CopyHuman.name;
+	age = CopyHuman.age + 1;
+	cout << name << " copy of age " << age << endl;
+    }
+
+
+    ~Human()
+    {
+	cout << "Invoking destructor ....Human: " << name << endl;
+	//delete [] &name;
+    }
+};
+
+int classes_fn() {
+   Human adam;
+   Human eve("Eva", 18);  
+   Human adams("Bala", 40);  
+   Human adamc(adams);  
+   Human evec(eve);  
+   return 0;
+}
+
+
 
 int main()
 {
@@ -71,6 +109,8 @@ int main()
   //printname();
   vectorfn();
   lambda_fn();
+  classes_fn();
+  Human eves("Poojaa", 18);  
   //string url = "www.example.com";
   string url = "https://api.openweathermap.org/data/2.5/weather?q=Austin,us&appid=ee62a6da139f3ec355563665665e21c8&units=metric";
 
