@@ -68,13 +68,38 @@ class Human
   private:
     int age;
     string name;
+    bool isFemale=0;
   public:
+#if 0
     Human(string humansname = "Adam", int humansage = 25)
     {
 	name = humansname;
 	age = humansage;
 	cout << name << " of age " << age << endl;
     }
+#endif
+    Human(string humansname = "Ava", int humansage = 25, bool HumanisFemale = 0)
+    {
+	name = humansname;
+	age = humansage;
+	isFemale = HumanisFemale;
+	cout << "Constructor: " << name << " of age " << age << " is a " << isFemale << endl;
+    }
+
+    void printHum(){
+	cout << "Print: " << name << " of age " << age << " is a " << isFemale << endl;
+	if(isFemale)
+	    cout << "Voila its a Mermaid" << endl;
+    }
+
+    void editHum(string humansname = "Ava", int humansage = 25, bool HumanisFemale = 0)
+    {
+	name = humansname;
+	age = humansage;
+	isFemale = HumanisFemale;
+	cout << "Edit: " << name << " of age " << age << " is a " << isFemale << endl;
+    }
+
 
     Human(const Human& CopyHuman)
     {
@@ -82,7 +107,6 @@ class Human
 	age = CopyHuman.age + 1;
 	cout << name << " copy of age " << age << endl;
     }
-
 
     ~Human()
     {
@@ -92,7 +116,7 @@ class Human
 };
 
 int classes_fn() {
-   Human adam;
+   //Human adam;
    Human eve("Eva", 18);  
    Human adams("Bala", 40);  
    Human adamc(adams);  
@@ -101,6 +125,92 @@ int classes_fn() {
 }
 
 
+class Fish {
+   protected:
+     bool isFreshWateriFish;
+     bool count = 1;
+   private:
+     int weight=0;
+   public:
+     void swim() {
+	 if (isFreshWateriFish) {
+	    cout << "Yes, from lake" << endl;
+	    weight = 10;
+	 }
+	 else {
+	    cout << "No, from ocean" << endl;
+	    weight = 20;
+	 }
+     }
+
+     void prop() {
+        cout << "weight is " << weight << ", count is " << count << endl;
+     }
+};
+
+class Tuna: public Fish {
+   public:
+     Tuna (){
+        isFreshWateriFish = false;
+     }
+};
+
+class Carp: public Fish {
+   public:
+     Carp (){
+        isFreshWateriFish = true;
+     }
+};
+
+class Mermaid: public Fish, public Human {
+   public:
+     Mermaid (){
+        isFreshWateriFish = true;
+	//editHum("Atulya", 25, true);
+     }
+
+     ~Mermaid (){
+	//cout << "Invoking ....Destructor" << printHum() << endl;
+	cout << "Invoking ....Destructor....Mermaid"  << endl;
+     }
+};
+
+
+int inheritance_fn () {
+   Carp MyLunch;
+   Tuna MyDinner;
+   Mermaid MyFriend;
+
+   //MyLunch.prop();
+   MyLunch.swim();
+   MyLunch.prop();
+
+   MyDinner.swim();
+   MyDinner.prop();
+   MyLunch.prop();
+
+   MyFriend.swim();
+   MyFriend.prop();
+   MyFriend.editHum("Atulya", 25, true);
+   MyFriend.printHum();
+
+   return 0;
+}
+
+void Make_poly(Fish& inputfish) {
+   inputfish.swim();
+   inputfish.prop();
+}
+
+int polymorh_fn(){
+   Tuna MyDinner;
+   Carp MyLunch;
+   
+   Make_poly(MyDinner);
+   Make_poly(MyLunch);
+
+   return 0;
+}
 
 int main()
 {
@@ -109,7 +219,9 @@ int main()
   //printname();
   vectorfn();
   lambda_fn();
-  classes_fn();
+  //classes_fn();
+  //inheritance_fn();
+  polymorh_fn();
   Human eves("Poojaa", 18);  
   //string url = "www.example.com";
   string url = "https://api.openweathermap.org/data/2.5/weather?q=Austin,us&appid=ee62a6da139f3ec355563665665e21c8&units=metric";
