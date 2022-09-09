@@ -15,7 +15,10 @@
 #include <vector>
 #include <algorithm>
 
+#include "list.h"
+
 using namespace std;
+
 
 typedef struct {
 
@@ -60,7 +63,19 @@ int lambda_fn()
       else
          cout << x << " is not divisible by " << d << endl;
    });
-   return 0;
+   cout << "Sorting 1: " ;
+   sort(v.begin(), v.end());
+   for (auto x : v) {
+      cout << x << ", ";
+   }
+   cout << endl;
+   cout << "Sorting 2: " ;
+   sort(v.begin(), v.end(), greater<int>());
+   for (auto x : v) {
+      cout << x << ", ";
+   }
+   cout << endl;
+  return 0;
 }
 
 class Human
@@ -115,12 +130,30 @@ class Human
     }
 };
 
+#include <set>
 int classes_fn() {
    //Human adam;
+   //std::set<Human<std::string, int>, comp> set = {
+   //set<Human<string, int>> set = {
+   vector<Human> vH = {
+     {"Apple", 50},
+     {"Orange", 50},
+     {"Grape", 50},
+     {"Banana", 50},
+     {"Guava", 50}
+   };
+  cout << "size: " << vH.size() << " capacity: " << vH.capacity() << endl;
+  //vH.emplace_back("Tomato", 60);
+  //vH.push_back("onion", 60);
+  //cout << "size: " << vH.size() << " capacity: " << vH.capacity() << endl;
+  //vH.shrink_to_fit();
+  //cout << "size: " << vH.size() << " capacity: " << vH.capacity() << endl;
    Human eve("Eva", 18);  
    Human adams("Bala", 40);  
    Human adamc(adams);  
    Human evec(eve);  
+   //adams.editHum();
+   //Human::printHum();
    return 0;
 }
 
@@ -217,11 +250,12 @@ int main()
   std::cout << "Helloooo World" << std::endl;
   cout << "Hello World once again" << endl;
   //printname();
+  print_lst();
   vectorfn();
   lambda_fn();
-  //classes_fn();
+  classes_fn();
   //inheritance_fn();
-  polymorh_fn();
+  //polymorh_fn();
   Human eves("Poojaa", 18);  
   //string url = "www.example.com";
   string url = "https://api.openweathermap.org/data/2.5/weather?q=Austin,us&appid=ee62a6da139f3ec355563665665e21c8&units=metric";
@@ -250,5 +284,4 @@ int main()
   }
 
   return EXIT_FAILURE;
-
 }
