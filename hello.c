@@ -1,6 +1,7 @@
 #include<strings.h>
 #include<stdio.h>
 #include <stdbool.h>
+#include<stdint.h>
 
   struct ListNode {
       int val;
@@ -48,10 +49,13 @@ bool isPalindrome(struct ListNode* head){
     return false;
 }
 
+void printBits();
+
 int main()
 {
    int count=5, midpt=0;
    midpt = (count/2) ;
    printf(" midpt = %d\n", midpt);
+   printBits();
   return 0;
 }
