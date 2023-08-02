@@ -49,7 +49,7 @@ bool isPalindrome(struct ListNode* head){
     return false;
 }
 
-void printBits();
+extern void printBits();
 
 int main()
 {
