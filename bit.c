@@ -201,7 +201,7 @@ int bubbleSortArr(int* arr, int arrSize, int* ptr){
  */
 int* sortByBits(int* arr, int arrSize, int* returnSize){
     int *ptr=NULL;
-    ptr = calloc(arrSize, sizeof(int));
+    ptr = (int*)calloc(arrSize, sizeof(int));
     if(ptr == NULL) {
         returnSize = 0;
         return NULL;

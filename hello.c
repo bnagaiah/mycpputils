@@ -7,7 +7,7 @@
       int val;
       struct ListNode *next;
   };
-
+#if 0
 bool isPalindrome(struct ListNode* head){
     struct ListNode* CPTR = head;
     struct ListNode* TPTR = head->next;
@@ -48,14 +48,18 @@ bool isPalindrome(struct ListNode* head){
     
     return false;
 }
-
+#endif
 void printBits();
+void printStr();
+void print_lst();
 
 int main()
 {
    int count=5, midpt=0;
    midpt = (count/2) ;
    printf(" midpt = %d\n", midpt);
-   printBits();
+//   printBits();
+   printStr();
+  print_lst();
   return 0;
 }

@@ -1,5 +1,6 @@
 #include<iostream>
 #include "list.h"
+#include <cstring>
 using namespace std;
 
 bool isPalindrome(struct ListNode* head){
@@ -58,13 +59,110 @@ void ins_list(ListNode_T **pHead, Datas_T data) {
    }
 }
 
-void disp_list(ListNode_T *pHeadList) {
+void ddisp_list(ListNode_T *pHeadList) {
+   int count = 0;
+    cout << "in disp_list" << endl;
    while(pHeadList) {
-     cout << pHeadList->data.val << " ,";
+     cout << pHeadList << "->" << pHeadList->data.val << " ,";
      pHeadList = pHeadList->next;
+        count++;
+        if (count > 100) {
+            return;
+        }
+
    }
    cout << endl;
 }
+
+void inst_list(ListNode_T **pHead, Datas_T data) {
+   ListNode_T *pHeadList = *pHead;
+   if(pHeadList) {
+	//cout << pHeadList << "->" << pHeadList->data.val << " ,";
+	inst_list(&(pHeadList->next), data);
+   } else {
+	ListNode_T *temp = new ListNode_T;
+	cout << "new member " << endl;
+	memcpy(&(temp->data), &data, sizeof(Datas_T));
+	//memcpy(temp->data, &data, sizeof(Datas_T));
+	temp->next = NULL;
+	if(pHeadList != NULL) {
+	   pHeadList->next = temp;
+	}
+	*pHead = temp;
+   }
+}
+
+
+void disp_list(ListNode_T *pHeadList) {
+   if(pHeadList) {
+	cout << pHeadList << "->" << pHeadList->data.val << " ,";
+	disp_list(pHeadList->next);
+   } else {
+	cout << endl;
+   }
+}
+
+void reverse_disp_list(ListNode_T *pHeadList) {
+   if(pHeadList) {
+	reverse_disp_list(pHeadList->next);
+	cout << pHeadList << "->" << pHeadList->data.val << " ,";
+   }
+}
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+ListNode_T* swapPairs(ListNode_T* head) {
+     ListNode_T* TPTR = head;
+    ListNode_T* nodeA=NULL;
+    ListNode_T* nodeB=NULL;
+    ListNode_T* nodeC=NULL;
+    ListNode_T* pPTR=NULL;
+    int count = 0;
+    cout << "in swapPairs" << endl;
+    while(TPTR) {
+        if(nodeA == NULL) {
+            nodeA = TPTR;
+            if(nodeB == NULL) {
+                if(TPTR->next != NULL) {
+                    head = TPTR->next;
+		    //cout << head->data.val << endl;
+		    //cout << TPTR->data.val << endl;
+		}
+            }
+        }
+        else {
+            nodeB = TPTR;
+	    nodeC = TPTR->next;
+            //nodeB->next = nodeA;
+            nodeA->next = nodeC;
+	    nodeB->next = nodeA;
+	    if (pPTR != NULL) {
+	    	pPTR->next = nodeB;
+	    }
+            TPTR = nodeA;
+            pPTR = nodeA;
+	    //cout << nodeA->data.val << ",A ";
+	    //cout << nodeB->data.val << ",B  ";
+            nodeA = NULL;
+        }
+	    //cout << TPTR->data.val << ", ";
+	//cout << TPTR->data.val << endl;
+	disp_list(head);
+        TPTR = TPTR->next;
+        count++;
+        if (count > 100) {
+            return NULL;
+        }
+    }
+    return head;
+}
+
+
 
 void print_lst() {
   ListNode_T *pList = NULL;
@@ -74,10 +172,18 @@ void print_lst() {
   while(i < n) {
     Datas_T data;
     data.val = arr[i];
-    ins_list(&pList, data);
+    cout << "plist: " << pList << endl;
+    inst_list(&pList, data);
     i++;
   }
   disp_list(pList);
 
   cout << "print_lst mssg: " << isPalindrome(pList) << endl;
+  pList = swapPairs(pList);
+  cout << "swapped" << endl;
+  disp_list(pList);
+  cout << "displayed" << endl;
+  ddisp_list(pList);
+  reverse_disp_list(pList);
+   cout << endl;
 }

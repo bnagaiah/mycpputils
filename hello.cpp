@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+// apt install libcurlpp-dev
 #include <curlpp/cURLpp.hpp>
 #include <curlpp/Options.hpp>
 #include <sstream>
@@ -118,7 +118,7 @@ class Human
 
     Human(const Human& CopyHuman)
     {
-	name = CopyHuman.name;
+	name = CopyHuman.name+"z";
 	age = CopyHuman.age + 1;
 	cout << name << " copy of age " << age << endl;
     }
@@ -149,9 +149,9 @@ int classes_fn() {
   //vH.shrink_to_fit();
   //cout << "size: " << vH.size() << " capacity: " << vH.capacity() << endl;
    Human eve("Eva", 18);  
-   Human adams("Bala", 40);  
-   Human adamc(adams);  
-   Human evec(eve);  
+   //Human adams("Bala", 40);  
+   //Human adamc(adams);  
+   //Human evec(eve);  
    //adams.editHum();
    //Human::printHum();
    return 0;
@@ -245,12 +245,15 @@ int polymorh_fn(){
    return 0;
 }
 
+void print_lst();
+
 int main()
 {
   std::cout << "Helloooo World" << std::endl;
   cout << "Hello World once again" << endl;
   //printname();
   print_lst();
+  //return 0;
   vectorfn();
   lambda_fn();
   classes_fn();
